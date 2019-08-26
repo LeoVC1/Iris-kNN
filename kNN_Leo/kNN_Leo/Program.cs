@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace kNN_Leo
 {
@@ -7,13 +8,7 @@ namespace kNN_Leo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            float[] array = { 1.2f, 3.3f, 5.4f, 1.4f, 7.2f };
-
-            array = TimSort.timSort(array, array.Length);
-            //TimSort.printArray(array, array.Length);
-
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\180976\Desktop\iris.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\leovc\Desktop\Iris-kNN\iris.txt");
 
             List<Flor> flores = new List<Flor>();
 
@@ -21,8 +16,8 @@ namespace kNN_Leo
             {
                 string[] aux;
                 aux = lines[i].Split(',');
-                Vector2 sepala = new Vector2(float.Parse(aux[0]), float.Parse(aux[1]));
-                Vector2 petala = new Vector2(float.Parse(aux[2]), float.Parse(aux[3]));
+                Vector2 sepala = new Vector2(float.Parse(aux[0], new CultureInfo("en-US")), float.Parse(aux[1], new CultureInfo("en-US")));
+                Vector2 petala = new Vector2(float.Parse(aux[2], new CultureInfo("en-US")), float.Parse(aux[3], new CultureInfo("en-US")));
                 string type = aux[4];
 
                 flores.Add(new Flor(type, sepala, petala));
@@ -30,10 +25,69 @@ namespace kNN_Leo
 
             do
             {
+                float[] distancias = new float[flores.Count];
 
-            }
+                Vector2 sepala = new Vector2();
+                Vector2 petala = new Vector2();
+
+                Console.Write("Insira o comprimento da sepala: ");
+                sepala.x = float.Parse(Console.ReadLine(), new CultureInfo("en-US"));
+
+                Console.Write("Insira a largura da sepala: ");
+                sepala.y = float.Parse(Console.ReadLine(), new CultureInfo("en-US"));
+
+                Console.Write("Insira a comprimento da petala: ");
+                petala.x = float.Parse(Console.ReadLine(), new CultureInfo("en-US"));
+
+                Console.Write("Insira a largura da petala: ");
+                petala.y = float.Parse(Console.ReadLine(), new CultureInfo("en-US"));
+
+                Flor amostra = new Flor("", sepala, petala);
+
+                for (int i = 0; i < distancias.Length; i++)
+                {
+                    distancias[i] = amostra.Distance(flores[i]);
+                }
+
+                Console.WriteLine("Distancias:");
+
+                flores = TimSort.InsertionSort(distancias, flores);
+
+                Console.Write("Insira o valor K: ");
+                int K = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Maior probalidade da planta inserida ser uma " + ChooseType(flores, K));
+
+                Console.Write("Deseja repetir? ");
+            } while (int.Parse(Console.ReadLine()) != 0);
 
             Console.ReadKey();
+        }
+
+        public static string ChooseType(List<Flor> flores, int K)
+        {
+            int set = 0, ver = 0, vir = 0;
+            for (int i = 0; i < K; i++)
+            {
+                switch (flores[i].type)
+                {
+                    case "Iris-setosa":
+                        set++;
+                        break;
+                    case "Iris-versicolor":
+                        ver++;
+                        break;
+                    case "Iris-virginica":
+                        vir++;
+                        break;
+                }
+            }
+            if (set > ver && set > vir)
+                return "Iris-setosa";
+            else if (ver > vir)
+                return "Iris-versicolor";
+            else
+                return "Iris-virginica";
         }
     }
 }

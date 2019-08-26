@@ -25,6 +25,27 @@ namespace kNN_Leo
             }
         }
 
+        public static List<Flor> InsertionSort(float[] vetor, List<Flor> flores)
+        {
+            for (var i = 1; i < vetor.Length; i++)
+            {
+                Flor aux1 = flores[i];
+                var aux = vetor[i];
+                var j = i - 1;
+
+                while (j >= 0 && vetor[j] > aux)
+                {
+                    vetor[j + 1] = vetor[j];
+                    flores[j + 1] = flores[j];
+                    j -= 1;
+                }
+                flores[j + 1] = aux1;
+                vetor[j + 1] = aux;
+            }
+
+            return flores;
+        }
+
         // merge function merges the sorted runs  
         public static void merge(float[] arr, int l, int m, int r)
         {
@@ -108,11 +129,17 @@ namespace kNN_Leo
         }
 
         // utility function to print the Array  
-        public static void printArray(string[] arr, int n)
+        public static void printArray(float[] arr, int n)
         {
             for (int i = 0; i < n; i++)
                 Console.Write(arr[i] + " ");
             Console.Write("\n");
+        }
+
+        public static void PrintList(List<Flor> flores)
+        {
+            for (int i = 0; i < flores.Count; i++)
+                Console.WriteLine(flores[i].sepala.x + "/" + flores[i].sepala.y + "/" + flores[i].petala.x + "/" + flores[i].petala.y + "/" + flores[i].type);
         }
 
     }
