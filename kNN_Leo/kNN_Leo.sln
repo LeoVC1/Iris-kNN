@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kNN_Leo", "kNN_Leo\kNN_Leo.csproj", "{02DE6162-B169-4DC7-AD74-02BD944AC260}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02DE6162-B169-4DC7-AD74-02BD944AC260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DE6162-B169-4DC7-AD74-02BD944AC260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DE6162-B169-4DC7-AD74-02BD944AC260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DE6162-B169-4DC7-AD74-02BD944AC260}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {709197D7-B26C-47DA-B295-1B81B5FFEDAB}
+	EndGlobalSection
+EndGlobal
